@@ -4,12 +4,15 @@ import Text from './Text';
 import theme from "../theme";
 
 const styles = StyleSheet.create({
-    tab: {
-      color: theme.colors.contrastText,
-      fontSize: 24,
-      padding: 15
-    },
-  });
+  container: {
+    padding: 20,
+  },
+  tab: {
+    color: theme.colors.contrastText,
+    fontSize: 24,
+    padding: 15
+  },
+});
 
 const AppBarTab = ({ text, onPress }) => (
     <TouchableWithoutFeedback style={styles.container} onPress={onPress}>

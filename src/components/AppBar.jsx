@@ -7,10 +7,7 @@ import theme from "../theme";
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: theme.appBar.backgroundColor,
-    flex: 1.5,
-    flexDirection: 'row',
-    alignItems: 'flex-end'
+    backgroundColor: theme.appBar.backgroundColor
   }
 });
 
