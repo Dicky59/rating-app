@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     flexShrink: 1,
-    backgroundColor: '#F5F5DC',
+    backgroundColor: theme.backgroundColor,
   },
   flexContainer: {
     display: 'flex',

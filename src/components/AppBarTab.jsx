@@ -14,12 +14,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const AppBarTab = ({ text, onPress }) => (
-    <TouchableWithoutFeedback style={styles.container} onPress={onPress}>
-          <Text style={styles.tab}>
-              {text}
-          </Text>
-      </TouchableWithoutFeedback>
+const AppBarTab = props => {
+  return (
+    <TouchableWithoutFeedback style={styles.container} {...props}>
+      <Text style={styles.tab}>
+        {props.children}
+      </Text>
+    </TouchableWithoutFeedback>
   );
+};
 
 export default AppBarTab;
