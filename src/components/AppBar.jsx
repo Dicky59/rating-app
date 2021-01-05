@@ -25,7 +25,7 @@ const AppBar = () => (
         Repositories
       </Link>
       <Link to='/signin' component={AppBarTab}>
-        Sign in to this very important application you dude!
+        Sign in
       </Link>
     </ScrollView>
   </View>
