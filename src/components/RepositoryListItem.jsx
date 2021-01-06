@@ -1,93 +1,120 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import theme from '../theme';
 import Text from './Text';
-import StatisticItem from './StatisticItem';
+import formatInThousands from '../utils/formatInThousands';
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: 'white',
+    padding: 15,
+  },
+  topContainer: {
+    flexDirection: 'row',
+    marginBottom: 15,
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  avatarContainer: {
+    flexGrow: 0,
+    marginRight: 20,
+  },
+  contentContainer: {
     flexGrow: 1,
     flexShrink: 1,
-    backgroundColor: '#F5F5DC',
+  },
+  nameText: {
+    marginBottom: 5,
+  },
+  descriptionText: {
+    flexGrow: 1,
   },
   avatar: {
-    width: 50,
-    height: 50,
-    margin: 20,
-    borderRadius: 5,
+    width: 45,
+    height: 45,
+    borderRadius: theme.roundness,
   },
-  language: {
-    backgroundColor: theme.colors.primary,
-    padding: 10,
-    borderRadius: 5,
+  countItem: {
+    flexGrow: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 15,
+  },
+  countItemCount: {
+    marginBottom: 5,
+  },
+  languageContainer: {
+    marginTop: 10,
+    flexDirection: 'row',
   },
   languageText: {
     color: 'white',
-  },
-  flexContainerA: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-  },
-  flexContainerB: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    paddingTop: 20,
-    flex: 0.8,
-  },
-  countDetails: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    padding: 20,
-  },
-  fullname: {
-    color: theme.colors.textPrimary,
-    fontSize: theme.fontSizes.subheading,
-    fontWeight: theme.fontWeights.bold,
-    marginBottom: 10,
-  },
-  description: {
-    color: theme.colors.textSecondary,
-    fontSize: theme.fontSizes.body,
-    fontWeight: theme.fontWeights.normal,
-    marginBottom: 10,
+    backgroundColor: theme.colors.primary,
+    borderRadius: theme.roundness,
+    flexGrow: 0,
+    paddingVertical: 3,
+    paddingHorizontal: 6,
   },
 });
 
-const RepositoryListItem = ({ list }) => {
+const CountItem = ({ label, count }) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.flexContainerA}>
-        <View>
-          <Image 
-            style={styles.avatar} 
-            source={{ uri: `${list.item.ownerAvatarUrl}` }}
-          />
-        </View>
-        <View style={styles.flexContainerB}>
-          <View>
-            <Text style={styles.fullname}>{list.item.fullName}</Text>
-          </View>
-          <View>
-            <Text style={styles.description}>{list.item.description}</Text>
-          </View>
-          <View style={styles.language}>
-            <Text style={styles.languageText}>{list.item.language}</Text>
-          </View>
-        </View>
-      </View>
-      <View style={styles.countDetails}>
-        <StatisticItem name="Stars" count={list.item.stargazersCount} />
-        <StatisticItem name="Forks" count={list.item.forksCount} />
-        <StatisticItem name="Rating" count={list.item.ratingAverage} />
-        <StatisticItem name="Reviews" count={list.item.reviewCount} />
-      </View>    
+    <View style={styles.countItem}>
+      <Text style={styles.countItemCount} fontWeight="bold">
+        {formatInThousands(count)}
+      </Text>
+      <Text color="textSecondary">{label}</Text>
     </View>
   );
 };
 
-export default RepositoryListItem;
+const RepositoryItem = ({ repository }) => {
+  const {
+    fullName,
+    description,
+    language,
+    forksCount,
+    stargazersCount,
+    ratingAverage,
+    reviewCount,
+    ownerAvatarUrl,
+  } = repository;
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.topContainer}>
+        <View style={styles.avatarContainer}>
+          <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
+        </View>
+        <View style={styles.contentContainer}>
+          <Text
+            style={styles.nameText}
+            fontWeight="bold"
+            fontSize="subheading"
+            numberOfLines={1}
+          >
+            {fullName}
+          </Text>
+          <Text style={styles.descriptionText} color="textSecondary">
+            {description}
+          </Text>
+          {language ? (
+            <View style={styles.languageContainer}>
+              <Text style={styles.languageText}>{language}</Text>
+            </View>
+          ) : null}
+        </View>
+      </View>
+      <View style={styles.bottomContainer}>
+        <CountItem count={stargazersCount} label="Stars" />
+        <CountItem count={forksCount} label="Forks" />
+        <CountItem count={reviewCount} label="Reviews" />
+        <CountItem count={ratingAverage} label="Rating" />
+      </View>
+    </View>
+  );
+};
+
+export default RepositoryItem;

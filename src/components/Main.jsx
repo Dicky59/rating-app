@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     flexGrow: 1,
     flexShrink: 1,
-    backgroundColor: theme.colors.white
+    backgroundColor: theme.colors.backgroundColor
   },
 });
 
@@ -24,7 +24,7 @@ const Main = () => {
       <Switch>
         <Route exact path='/' component={RepositoryList} />
         <Route path='/signin' component={SignIn} />
-        <Redirect to='/' />
+        <Redirect to="/" />
       </Switch>
     </View>
   );

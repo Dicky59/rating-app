@@ -8,25 +8,18 @@ import theme from "../theme";
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    flexDirection: 'row',
-    alignItems: "flex-end",
-    backgroundColor: theme.appBar.backgroundColor
+    backgroundColor: theme.colors.appBarBackground,
   },
-  tabsContainer: {
-    display: 'flex',
-    flexDirection: 'row'
-  }
+  scrollView: {
+    flexDirection: 'row',
+  },
 });
 
 const AppBar = () => (
   <View style={styles.container}>
-    <ScrollView horizontal style={styles.tabsContainer}>
-      <Link to='/' component={AppBarTab}>
-        Repositories
-      </Link>
-      <Link to='/signin' component={AppBarTab}>
-        Sign in
-      </Link>
+    <ScrollView style={styles.scrollView} horizontal>
+      <Link to='/' component={AppBarTab}>Repositories</Link>
+      <Link to='/signin' component={AppBarTab}>Sign in</Link>
     </ScrollView>
   </View>
 );
