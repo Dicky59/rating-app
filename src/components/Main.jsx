@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     flexGrow: 1,
     flexShrink: 1,
-    backgroundColor: theme.colors.backgroundColor
+    backgroundColor: theme.colors.appBarBackground
   },
 });
 

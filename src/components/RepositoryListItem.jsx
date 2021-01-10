@@ -6,7 +6,7 @@ import formatInThousands from '../utils/formatInThousands';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: '#F5F5DC',
     padding: 15,
   },
   topContainer: {
@@ -70,7 +70,7 @@ const CountItem = ({ label, count }) => {
   );
 };
 
-const RepositoryItem = ({ repository }) => {
+const RepositoryListItem = ({ repository }) => {
   const {
     fullName,
     description,
@@ -117,4 +117,4 @@ const RepositoryItem = ({ repository }) => {
   );
 };
 
-export default RepositoryItem;
+export default RepositoryListItem;
