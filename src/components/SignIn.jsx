@@ -55,13 +55,8 @@ const SignIn = () => {
 
   const onSubmit = async (values) => {
     const { username, password } = values;
-    try {
-      const { data } = await signIn({ username, password });
-      console.log(data);
-      console.log(username, password);
-    } catch (error) {
-      console.log(error);
-    }
+    
+    await signIn({ username, password });
   };
 
   return (
