@@ -37,16 +37,20 @@ const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
       <View style={styles.fieldContainer}>
-        <FormikTextInput name="username" placeholder="Username" />
+        <FormikTextInput 
+          name="username"
+          placeholder="Username"
+          testID='testUsername' />
       </View>
       <View style={styles.fieldContainer}>
         <FormikTextInput
           name="password"
           placeholder="Password"
           secureTextEntry
+          testID='testPassword'
         />
       </View>
-      <Button onPress={onSubmit}>Sign in</Button>
+      <Button testID='testButton' onPress={onSubmit}>Sign in</Button>
     </View>
   );
 };
@@ -62,7 +66,10 @@ const SignIn = () => {
     
     history.push('/');
   };
+  return <SignInContainer onSubmit={onSubmit} />;
+};
 
+export const SignInContainer = ({ onSubmit }) => {  
   return (
     <Formik
       initialValues={initialValues}
