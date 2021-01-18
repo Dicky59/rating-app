@@ -22,8 +22,12 @@ const Main = () => {
     <View style={styles.container}>
       <AppBar />
       <Switch>
-        <Route exact path='/' component={RepositoryList} />
-        <Route path='/signin' component={SignIn} />
+        <Route path="/" exact>
+          <RepositoryList />
+        </Route>
+        <Route path="/sign-in" exact>
+          <SignIn />
+        </Route>
         <Redirect to="/" />
       </Switch>
     </View>

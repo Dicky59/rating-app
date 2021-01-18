@@ -1,15 +1,25 @@
 import { gql } from "apollo-boost";
 
-export const REPOSITORY_DETAILS = gql`
-  fragment RepositoryDetails on Repository {
+export const REPOSITORY_BASE_FIELDS = gql`
+  fragment RepositoryBaseFields on Repository {
     id
+    name
+    ownerName
     fullName
-    reviewCount
-    ratingAverage
-    forksCount
     stargazersCount
+    forksCount
+    url
+    ownerAvatarUrl
     description
     language
-    ownerAvatarUrl
+    createdAt
+  }
+`;
+
+export const USER_BASE_FIELDS = gql`
+  fragment UserBaseFields on User {
+    id
+    username
+    createdAt
   }
 `;

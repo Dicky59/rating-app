@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
+
 import theme from '../theme';
 import Text from './Text';
 import formatInThousands from '../utils/formatInThousands';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#F5F5DC',
+    backgroundColor: 'white',
     padding: 15,
   },
   topContainer: {
@@ -59,10 +60,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const CountItem = ({ label, count }) => {
+const CountItem = ({ label, count, testID }) => {
   return (
     <View style={styles.countItem}>
-      <Text style={styles.countItemCount} fontWeight="bold">
+      <Text testID={testID} style={styles.countItemCount} fontWeight="bold">
         {formatInThousands(count)}
       </Text>
       <Text color="textSecondary">{label}</Text>
@@ -70,7 +71,7 @@ const CountItem = ({ label, count }) => {
   );
 };
 
-const RepositoryListItem = ({ repository }) => {
+const RepositoryItem = ({ repository }) => {
   const {
     fullName,
     description,
@@ -89,7 +90,8 @@ const RepositoryListItem = ({ repository }) => {
           <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
         </View>
         <View style={styles.contentContainer}>
-          <Text
+          <Text 
+            testID="fullName"
             style={styles.nameText}
             fontWeight="bold"
             fontSize="subheading"
@@ -97,24 +99,24 @@ const RepositoryListItem = ({ repository }) => {
           >
             {fullName}
           </Text>
-          <Text style={styles.descriptionText} color="textSecondary">
+          <Text testID="description" style={styles.descriptionText} color="textSecondary">
             {description}
           </Text>
           {language ? (
             <View style={styles.languageContainer}>
-              <Text style={styles.languageText}>{language}</Text>
+              <Text testID="language" style={styles.languageText}>{language}</Text>
             </View>
           ) : null}
         </View>
       </View>
       <View style={styles.bottomContainer}>
-        <CountItem count={stargazersCount} label="Stars" />
-        <CountItem count={forksCount} label="Forks" />
-        <CountItem count={reviewCount} label="Reviews" />
-        <CountItem count={ratingAverage} label="Rating" />
+        <CountItem testID='stargazersCount' count={stargazersCount} label="Stars" />
+        <CountItem testID='forksCount' count={forksCount} label="Forks" />
+        <CountItem testID='reviewCount' count={reviewCount} label="Reviews" />
+        <CountItem testID='ratingAverage' count={ratingAverage} label="Rating" />
       </View>
     </View>
   );
 };
 
-export default RepositoryListItem;
+export default RepositoryItem;
