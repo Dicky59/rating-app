@@ -7,8 +7,6 @@ export const GET_REPOSITORIES = gql`
       edges {
         node {
           ...RepositoryBaseFields
-          ratingAverage
-          reviewCount
         }
       }
     }
@@ -16,6 +14,15 @@ export const GET_REPOSITORIES = gql`
 
   ${REPOSITORY_BASE_FIELDS}
 `;
+
+export const GET_REPOSITORY_BY_ID = gql`
+  query GetRepositoryById($id: ID!) {
+    repository(id: $id) {
+      ...RepositoryBaseFields
+    }
+  }
+  ${REPOSITORY_BASE_FIELDS}
+`; 
 
 export const AUTHORIZED_USER = gql`
   query {

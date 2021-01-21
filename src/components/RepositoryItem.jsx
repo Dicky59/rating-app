@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
-
+import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import theme from '../theme';
 import Text from './Text';
 import formatInThousands from '../utils/formatInThousands';
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
   container: {
@@ -58,12 +58,24 @@ const styles = StyleSheet.create({
     paddingVertical: 3,
     paddingHorizontal: 6,
   },
+  button: {
+    textAlign: 'center',
+    color: 'white',
+    backgroundColor: theme.colors.primary,
+    borderColor: theme.colors.primary,
+    margin: 6,
+    borderTopWidth: 2,
+    borderBottomWidth: 2,
+    borderWidth: 4,
+    borderRadius: theme.roundness,
+    padding: 10,
+  },
 });
 
-const CountItem = ({ label, count, testID }) => {
+const CountItem = ({ label, count }) => {
   return (
     <View style={styles.countItem}>
-      <Text testID={testID} style={styles.countItemCount} fontWeight="bold">
+      <Text style={styles.countItemCount} fontWeight="bold">
         {formatInThousands(count)}
       </Text>
       <Text color="textSecondary">{label}</Text>
@@ -71,7 +83,7 @@ const CountItem = ({ label, count, testID }) => {
   );
 };
 
-const RepositoryItem = ({ repository }) => {
+const RepositoryItem = ({ repository, gitButton }) => {
   const {
     fullName,
     description,
@@ -81,6 +93,7 @@ const RepositoryItem = ({ repository }) => {
     ratingAverage,
     reviewCount,
     ownerAvatarUrl,
+    url
   } = repository;
 
   return (
@@ -90,8 +103,7 @@ const RepositoryItem = ({ repository }) => {
           <Image source={{ uri: ownerAvatarUrl }} style={styles.avatar} />
         </View>
         <View style={styles.contentContainer}>
-          <Text 
-            testID="fullName"
+          <Text
             style={styles.nameText}
             fontWeight="bold"
             fontSize="subheading"
@@ -99,22 +111,30 @@ const RepositoryItem = ({ repository }) => {
           >
             {fullName}
           </Text>
-          <Text testID="description" style={styles.descriptionText} color="textSecondary">
+          <Text style={styles.descriptionText} color="textSecondary">
             {description}
           </Text>
           {language ? (
             <View style={styles.languageContainer}>
-              <Text testID="language" style={styles.languageText}>{language}</Text>
+              <Text style={styles.languageText}>{language}</Text>
             </View>
           ) : null}
         </View>
       </View>
       <View style={styles.bottomContainer}>
-        <CountItem testID='stargazersCount' count={stargazersCount} label="Stars" />
-        <CountItem testID='forksCount' count={forksCount} label="Forks" />
-        <CountItem testID='reviewCount' count={reviewCount} label="Reviews" />
-        <CountItem testID='ratingAverage' count={ratingAverage} label="Rating" />
+        <CountItem count={stargazersCount} label="Stars" />
+        <CountItem count={forksCount} label="Forks" />
+        <CountItem count={reviewCount} label="Reviews" />
+        <CountItem count={ratingAverage} label="Rating" />
       </View>
+      {gitButton ? 
+        <View>
+          <TouchableOpacity testID='submitButton' onPress={() => Linking.openURL(url)} activeOpacity={0.4}>
+            <Text fontWeight="bold" fontSize="subheading" style={styles.button}>Open in GitHub</Text>
+          </TouchableOpacity>
+        </View>
+        : null
+      }
     </View>
   );
 };

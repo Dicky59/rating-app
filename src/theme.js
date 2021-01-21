@@ -8,7 +8,7 @@ const theme = {
       textPrimary: "#24292e",
       textSecondary: "#586069",
       contrastText: "#fafafa",
-      primary: "#CC7722",
+      primary: "#808000",
       error: '#d73a4a',
       divider: '#d1d5da',
     },
