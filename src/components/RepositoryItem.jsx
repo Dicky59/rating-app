@@ -7,7 +7,7 @@ import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.backgroundColor,
     padding: 15,
   },
   topContainer: {
@@ -130,7 +130,7 @@ const RepositoryItem = ({ repository, gitButton }) => {
       {gitButton ? 
         <View>
           <TouchableOpacity testID='submitButton' onPress={() => Linking.openURL(url)} activeOpacity={0.4}>
-            <Text fontWeight="bold" fontSize="subheading" style={styles.button}>Open in GitHub</Text>
+            <Text fontSize="subheading" style={styles.button}>Open in GitHub</Text>
           </TouchableOpacity>
         </View>
         : null

@@ -18,6 +18,35 @@ export const REPOSITORY_BASE_FIELDS = gql`
   }
 `;
 
+export const REVIEWED_REPOSITORY = gql`
+  fragment ReviewedRepository on Repository{
+    id
+    fullName
+    description
+    language
+    forksCount
+    stargazersCount
+    ratingAverage
+    reviewCount
+    ownerAvatarUrl
+    url
+    reviews {
+      edges {
+        node {
+          id
+          text
+          rating
+          createdAt
+          user {
+            id
+            username
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const USER_BASE_FIELDS = gql`
   fragment UserBaseFields on User {
     id

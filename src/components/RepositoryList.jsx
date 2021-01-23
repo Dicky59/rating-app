@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-native';
 
 const styles = StyleSheet.create({
   separator: {
-    height: 10,
+    height: 5,
   },
 });
 

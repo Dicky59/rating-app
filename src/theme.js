@@ -4,11 +4,11 @@ const theme = {
     roundness: 3,
     colors: {
       backgroundColor: "#F5F5DC",
-      appBarBackground: "#607D8B",
+      appBarBackground: "#457eac",
       textPrimary: "#24292e",
       textSecondary: "#586069",
       contrastText: "#fafafa",
-      primary: "#808000",
+      primary: "#686868",
       error: '#d73a4a',
       divider: '#d1d5da',
     },
