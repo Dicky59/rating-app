@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-
 import {
   View,
   ScrollView,
@@ -11,7 +10,6 @@ import Constants from 'expo-constants';
 import { Link } from 'react-router-native';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-native';
-
 import theme from '../theme';
 import Text from './Text';
 import AuthStorageContext from '../contexts/AuthStorageContext';
@@ -70,16 +68,20 @@ const AppBar = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView} horizontal>
-        <Link to="/" component={AppBarTab}>
-          Repositories
-        </Link>
-        {authorizedUser ? (
-          <AppBarTab onPress={onSignOut}>Sign out</AppBarTab>
-        ) : (
-          <Link to="/sign-in" component={AppBarTab}>
-            Sign in
-          </Link>
-        )}
+        <Link to="/" component={AppBarTab}>Repositories</Link>
+        {authorizedUser ?
+          <>
+            <Link to='/create-review' component={AppBarTab}>Create a review</Link>
+          </>
+          : null
+        }
+        {authorizedUser ?
+          <>
+            <Link to='/' onPress={onSignOut} component={AppBarTab}>Sign Out</Link>
+          </>
+          :
+            <Link to="/sign-in" component={AppBarTab}>Sign in</Link>
+          }
       </ScrollView>
     </View>
   );

@@ -1,7 +1,7 @@
 import { Platform } from "react-native";
 
 const theme = {
-    roundness: 3,
+    roundness: 5,
     colors: {
       backgroundColor: "#F5F5DC",
       appBarBackground: "#457eac",

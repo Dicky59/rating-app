@@ -14,6 +14,9 @@ const ItemSeparator = () => <View style={styles.separator} />;
 
 export const RepositoryListContainer = ({ repositories }) => {
   const history = useHistory();
+  const viewSingleRepo = id => {
+    history.push(`/repository/${id}`);
+  };
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : [];
@@ -23,7 +26,7 @@ export const RepositoryListContainer = ({ repositories }) => {
       data={repositoryNodes}
       keyExtractor={({ id }) => id}
       renderItem={({ item }) => 
-        <TouchableOpacity onPress={() => history.push(`${item.id}`)} activeOpacity={0.4}>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => viewSingleRepo(item.id)}>
           <RepositoryItem repository={item} />
         </TouchableOpacity>
       }
