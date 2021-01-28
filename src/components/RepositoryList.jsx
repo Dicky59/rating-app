@@ -1,5 +1,6 @@
-import React from 'react';
-import { FlatList, View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, View, StyleSheet, TouchableOpacity} from 'react-native';
+import RNPickerSelect from "react-native-picker-select";
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 import { useHistory } from 'react-router-native';
@@ -8,11 +9,20 @@ const styles = StyleSheet.create({
   separator: {
     height: 5,
   },
+  heading: {
+    padding: 10,
+    backgroundColor: "#e1e4e8",
+  },
+  dropdown: {
+    backgroundColor: "#e1e4e8",
+    color: "#e1e4e8",
+    borderRadius: 5,
+  },
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, sortOrder, setSortOrder }) => {
   const history = useHistory();
   const viewSingleRepo = id => {
     history.push(`/repository/${id}`);
@@ -23,6 +33,26 @@ export const RepositoryListContainer = ({ repositories }) => {
 
   return (
     <FlatList
+      ListHeaderComponent={
+        <RNPickerSelect
+          onValueChange={(value) => { setSortOrder(value); }}
+          value={sortOrder}
+          items={[
+            {
+              label: "Latest repositories",
+              value: "CREATED_AT_DESC",
+            },
+            {
+              label: "Highest rated repositories",
+              value: "RATING_AVERAGE_DESC",
+            },
+            {
+              label: "Lowest rated repositores",
+              value: "RATING_AVERAGE_ASC",
+            },
+          ]}
+        />
+      }
       data={repositoryNodes}
       keyExtractor={({ id }) => id}
       renderItem={({ item }) => 
@@ -36,8 +66,13 @@ export const RepositoryListContainer = ({ repositories }) => {
 };
 
 const RepositoryList = () => {
-  const { repositories } = useRepositories();
-  return <RepositoryListContainer repositories={repositories} />;
+  const [sortOrder, setSortOrder] = useState("CREATED_AT_DESC");
+  const { repositories } = useRepositories(sortOrder);
+  return <RepositoryListContainer
+    repositories={repositories}
+    sortOrder={sortOrder}
+    setSortOrder={setSortOrder}
+    />;
 };
 
 export default RepositoryList;
