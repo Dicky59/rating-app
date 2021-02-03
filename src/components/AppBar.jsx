@@ -73,6 +73,7 @@ const AppBar = () => {
         {authorizedUser ?
           <>
             <Link to='/create-review' component={AppBarTab}>Create a review</Link>
+            <Link to='/my-reviews' component={AppBarTab}>My reviews</Link>
           </>
           : null
         }

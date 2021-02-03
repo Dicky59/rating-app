@@ -8,6 +8,7 @@ import Constants from "expo-constants";
 import AppBar from './AppBar';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import MyReviews from './MyReviews';
 import theme from '../theme';
 
 
@@ -39,6 +40,9 @@ const Main = () => {
         </Route>
         <Route path='/sign-up' exact>
           <SignUp />
+        </Route>
+        <Route path="/my-reviews" exact>
+          <MyReviews />
         </Route>
         <Redirect to="/" />
       </Switch>
