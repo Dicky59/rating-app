@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
 });
 
 const ReviewItem = ({ review, showRepositoryName }) => {
+  
   return (
     <View style={styles.container}>
       <View style={styles.rating}>
@@ -44,7 +45,7 @@ const ReviewItem = ({ review, showRepositoryName }) => {
       </View>
       <View style={styles.reviewContainer}>
       {showRepositoryName ?
-          <Text style={styles.text} fontSize="subheading" fontWeight="bold">{review.fullName}</Text>
+          <Text style={styles.text} fontSize="subheading" fontWeight="bold">{review.name}</Text>
         :
           <Text style={styles.text} fontSize="subheading" fontWeight="bold">{review.user.username}</Text>
         }

@@ -1,5 +1,5 @@
 import { gql } from 'apollo-boost';
-import { REPOSITORY_BASE_FIELDS, USER_BASE_FIELDS } from "./fragments";
+import { REPOSITORY_BASE_FIELDS } from "./fragments";
 
 export const GET_REPOSITORIES = gql`
   query ($orderBy: AllRepositoriesOrderBy $orderDirection: OrderDirection $searchKeyword: String, $after: String, $first: Int) {
@@ -8,7 +8,6 @@ export const GET_REPOSITORIES = gql`
         node {
           ...RepositoryBaseFields
         }
-        cursor
       }
       pageInfo {
         endCursor
@@ -23,19 +22,11 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const GET_REPOSITORY_BY_ID = gql`
-  query GetRepositoryById($id: ID!, $after: String, $first: Int) {
+  query GetRepositoryById($id: ID!, $first: Int, $after: String, ) {
     repository(id: $id) {
-      id
-      fullName
-      description
-      language
-      forksCount
-      stargazersCount
-      ratingAverage
-      reviewCount
-      ownerAvatarUrl
+      ...RepositoryBaseFields
       url
-      reviews(after: $after, first: $first) {
+      reviews(first: $first, after: $after) {
         edges {
           node {
             id
@@ -48,7 +39,6 @@ export const GET_REPOSITORY_BY_ID = gql`
               username
             }
           }
-          cursor
         }
         pageInfo {
           endCursor
@@ -59,6 +49,7 @@ export const GET_REPOSITORY_BY_ID = gql`
       }
     }
   }
+  ${REPOSITORY_BASE_FIELDS}
 `; 
 
 export const AUTHORIZED_USER = gql`
@@ -80,7 +71,6 @@ query authorizedUser ($includeReviews: Boolean = false, $first: Int, $after: Str
             username
           }
         }
-        cursor
       }
       pageInfo {
         endCursor
